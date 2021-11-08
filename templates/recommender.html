@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>recommendation</title>
+</head>
+<body>
+<a href="{{ url_for('hello_world') }}"> back</a>
+<form action="{{ url_for('recommend') }}" method="post">
+<label>write a movie's title that you like</label>
+<input placeholder="title" name="movie_user_likes" required>
+<button type="submit" name="recommend"> submit</button>
+</form>
+{% for movie in movies %}
+{{ movie }}
+{% endfor %}
+</body>
+</html>
