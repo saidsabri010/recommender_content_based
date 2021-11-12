@@ -1,6 +1,5 @@
 import pandas as pd
-import numpy as np
-from flask import render_template, request
+from flask import render_template, request, redirect
 from flask import Flask
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
@@ -48,13 +47,13 @@ def recommend():  # put application's code here
     similar_movies = list(enumerate(cosine_sim[movie_index]))
     sorted_similar_movies = sorted(similar_movies, key=lambda x: x[1], reverse=True)
     count = 0
-    movies = []
+    data = []
     for movie in sorted_similar_movies:
-        movies.append(get_title_from_index(movie[0]))
+        data.append(get_title_from_index(movie[0]))
         count += 1
-        if count > 50:
+        if count >= 10:
             break
-    return render_template('recommender.html', movies=movies)
+    return render_template('recommender.html', data=data)
 
 
 if __name__ == '__main__':

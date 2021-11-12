@@ -7,25 +7,17 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
-<a href="{{ url_for('hello_world') }}"> back</a>
-<form action="{{ url_for('recommend') }}" method="post">
-<label>write a movie's title that you like</label>
-<input placeholder="title" name="movie_user_likes" required>
-<button type="submit" name="recommend"> submit</button>
-</form>
-<canvas id="bar-chart" width="35%" height="16%" ></canvas>
+<canvas id="bar-chart" width="400" height="400"></canvas>
 <script>
-     var config = {
+
+    var config = {
       type: 'bar',
       data: {
-        datasets: [{
-          data: [10, 9, 8, 7, 6, 5, 4, 3, 2, 1],
-          backgroundColor: [
-            '#40ff00', '#ff0000', '#ff8000', '#0000ff', '#D3D3D3', '#80ffff', '#ff66cc', '#99004d', '#ffff00', '#ff0066'
-          ],
-          label: 'Recommended Movies'
-        }],
-        labels: {{ data|safe }}
+          labels: {{ labels }},
+          datasets:[{
+              label: 'Population',
+              data:{{ data }}
+          }]
       },
       options: {
         responsive: true
@@ -36,6 +28,10 @@
       var ctx = document.getElementById('bar-chart').getContext('2d');
       window.myPie = new Chart(ctx, config);
     };
+
   </script>
+
+
+
 </body>
 </html>
